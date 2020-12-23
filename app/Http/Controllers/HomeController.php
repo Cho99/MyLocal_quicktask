@@ -24,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::withCount('posts','videos')->get();
+        $users = User::withCount('posts')->get();
+
         return view('home', compact('users'));
     }
-
 }
