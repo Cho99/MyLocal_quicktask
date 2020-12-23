@@ -11,19 +11,17 @@
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Total Posts</th>
-                            <th scope="col">Total Videos</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
-                            $i = 1;
+                        $i = 1;
                         @endphp
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row">{{ $i++ }}</th>
                                 <td>{{ $user->name }}</td>
-                                <td><a href="">{{ $user->posts_count }} Posts</a></td>
-                                <td><a href="">{{ $user->videos_count }} Videos</a></td>
+                                <td><a href="{{ route('posts.index') }}">{{ $user->posts_count }} Posts</a></td>
                             </tr>
                         @endforeach
                     </tbody>
