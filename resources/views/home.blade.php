@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">Home</h1>
+    <h1 class="text-center">{{ trans('label.home') }}</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="{{ route('posts.create') }}" type="button" class="btn btn-primary mb-2">Add Post</a>
+                <a href="{{ route('posts.create') }}" type="button" class="btn btn-primary mb-2">{{ trans('label.add_post') }}</a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Total Posts</th>
+                            <th scope="col">{{ trans('label.name_post') }}</th>
+                            <th scope="col">{{ trans('label.total_posts') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,7 +22,7 @@
                             <tr>
                                 <th scope="row">{{ $index++ }}</th>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->posts_count }} Posts</td>
+                                <td>{{ trans_choice('label.posts', $user->posts_count) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

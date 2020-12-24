@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">Edit Post</h1>
+    <h1 class="text-center">{{ trans('label.edit_post') }}</h1>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">

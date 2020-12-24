@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth');
     }
 
     /**
@@ -21,9 +21,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->get();
+        $users = User::withCount('posts')->get();
 
-        return view('posts.index', compact('posts'));
+        return view('home', compact('users'));
     }
 
     public function show($id)
@@ -59,9 +59,9 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $result = $post->save();
         if ($result) {
-            return redirect()->route('posts.create')->with('mess', 'Thêm mới bài Post thành công');
+            return redirect()->route('posts.create')->with('mess', trans('message.post_create_success'));
         } else {
-            return redirect()->route('posts.create')->with('mess', 'Thêm mới bài Post thất bại');
+            return redirect()->route('posts.create')->with('mess', trans('message.poss_create_fail'));
         }
     }
 
@@ -95,9 +95,9 @@ class PostController extends Controller
         ]);
         $result = $post->save();
         if ($result) {
-            return redirect()->route('posts.show', $user_id)->with('mess', 'Sửa bài viết thành công');
+            return redirect()->route('posts.show', $user_id)->with('mess', trans('message.post_edit_success'));
         } else {
-            return redirect()->back()->with('mess', 'Sửa bài viết thất bại');
+            return redirect()->back()->with('mess', trans('message.post_edit_fail'));
         }
     }
 
@@ -113,9 +113,9 @@ class PostController extends Controller
         $user_id = Auth::id();
         $result = $post->delete();
         if ($result) {
-            return redirect()->route('posts.show', $user_id)->with('mess', 'Xóa bài viết thành công');
+            return redirect()->route('posts.show', $user_id)->with('mess', trans('message.post_delete_success'));
         } else {
-            return redirect()->back()->with('mess', 'Xóa bài viết thất bại');
+            return redirect()->back()->with('mess', trans('message.post_delete_fail'));
         }
     }
 }
