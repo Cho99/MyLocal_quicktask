@@ -12,7 +12,6 @@ return [
     'forgot_password' => 'Quên mật khẩu',
     'create_password' => 'Mật khẩu',
     'have_account' => 'Đã có tài khoản ?',
-    'Login' => 'Đăng nhập',
     'remember_me' => 'Ghi nhớ đăng nhập',
     'name' => 'Họ và tên',
     'action' => 'Hành động',
@@ -26,7 +25,6 @@ return [
     'edit_post' => 'Sửa bài viết',
     'edit' => 'Sửa bài',
     'delete'=> 'Xóa bài',
-    'warning' => 'Thông báo',
     'lang' => [
         'en' => 'English',
         'vi' => 'Tiếng Việt',
