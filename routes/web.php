@@ -11,14 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'language'], function() {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('change-language/{language}', 'HomeController@changeLanguage')->name('change-language');
+    Route::resource('posts', 'PostController');
+    Auth::routes();
 });
-
-Auth::routes();
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
