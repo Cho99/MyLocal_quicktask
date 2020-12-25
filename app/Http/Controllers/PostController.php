@@ -12,6 +12,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('author')->only('edit', 'update', 'destroy');
     }
 
     /**
@@ -28,7 +29,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $user = User::find($id)->load('posts');
+        $user = User::findOrFail($id)->load('posts');
 
         return view('posts.show', compact('user'));
     }
@@ -73,7 +74,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
         return view('posts.edit', compact('post'));
     }
@@ -87,7 +88,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $post->name = $request->name;
         $user_id = Auth::id();
         $validated = $request->validate([
@@ -109,11 +110,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
-        $user_id = Auth::id();
+        $post = Post::findOrFail($id);
         $result = $post->delete();
         if ($result) {
-            return redirect()->route('posts.show', $user_id)->with('mess', trans('message.post_delete_success'));
+            return redirect()->route('posts.show', Auth::id())->with('mess', trans('message.post_delete_success'));
         } else {
             return redirect()->back()->with('mess', trans('message.post_delete_fail'));
         }
