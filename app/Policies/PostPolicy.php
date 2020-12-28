@@ -9,10 +9,19 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class PostPolicy
 {
     use HandlesAuthorization;
-    
+
+    public function before($user)
+    {
+        if ($user->role == 0) {
+            return true;
+        }
+    }
+
     public function update(User $user, Post $post)
     {
-        dd($post);
+        if ($user->id == $post->user_id) {
+            return true;
+        }
     }
 
     /**
@@ -24,6 +33,8 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
+        if ($user->id == $post->user_id) {
+            return true;
+        }
     }
 }
