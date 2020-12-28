@@ -13,7 +13,6 @@ class PostController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('auth.show')->only('show');
-        $this->middleware('author')->only('edit', 'update', 'destroy');
     }
 
     /**
@@ -77,7 +76,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $this->authorize($post, 'update');
-
+       
         return view('posts.edit', compact('post'));
     }
 
@@ -91,6 +90,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize($post, 'update');
         $post->name = $request->name;
         $user_id = Auth::id();
         $validated = $request->validate([
@@ -113,6 +113,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize($post, 'delete');
         $result = $post->delete();
         if ($result) {
             return redirect()->route('posts.show', Auth::id())->with('mess', trans('message.post_delete_success'));
