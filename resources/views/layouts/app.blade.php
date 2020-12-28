@@ -12,9 +12,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link rel="stylesheet" href="{{ asset('/bower_components/jquery/dist/jquery.js') }}">
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bower_components/Font-Awesome/css/all.css') }}">
 </head>
 
 <body>
@@ -22,10 +25,12 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
+                    <i class="fas fa-home"></i>
                     {{ trans('label.home') }}
                 </a>
                 @auth
                     <a class="navbar-brand" href="{{ route('posts.show', Auth::user()->id) }}">
+                        <i class="fas fa-newspaper"></i>
                         {{ trans('label.my_posts') }}
                     </a>
                 @endauth
@@ -56,11 +61,11 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i>
                                         {{ trans('label.logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                     </form>
                                 </div>
@@ -70,6 +75,7 @@
                             <div class="dropdown show">
                                 <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-globe"></i>
                                     {{ trans('label.languages') }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

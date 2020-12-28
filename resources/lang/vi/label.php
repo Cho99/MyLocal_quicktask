@@ -5,7 +5,7 @@ return [
     'logout' => 'Đăng xuất',
     'register' => 'Đăng ký',
     'languages' => 'Ngôn ngữ',
-    'message' => 'Thông báo: ',
+    'message' => 'Thông báo!',
     'email' => 'Email',
     'password' => 'Mật khẩu',
     'confirm_password' => 'Nhập lại mật khẩu',
@@ -25,6 +25,7 @@ return [
     'edit_post' => 'Sửa bài viết',
     'edit' => 'Sửa bài',
     'delete'=> 'Xóa bài',
+    'have_not_posts' => 'Chưa có bài viết nào',
     'lang' => [
         'en' => 'English',
         'vi' => 'Tiếng Việt',
