@@ -12,6 +12,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('auth.show')->only('show');
         $this->middleware('author')->only('edit', 'update', 'destroy');
     }
 
@@ -61,9 +62,9 @@ class PostController extends Controller
         $result = $post->save();
         if ($result) {
             return redirect()->route('posts.create')->with('mess', trans('message.post_create_success'));
-        } else {
-            return redirect()->route('posts.create')->with('mess', trans('message.poss_create_fail'));
         }
+
+        return redirect()->route('posts.create')->with('mess', trans('message.poss_create_fail'));
     }
 
     /**
@@ -75,6 +76,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize($post, 'update');
 
         return view('posts.edit', compact('post'));
     }
