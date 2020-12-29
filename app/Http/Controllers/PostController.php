@@ -13,6 +13,7 @@ class PostController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('auth.show')->only('show');
+        
     }
 
     /**
@@ -58,6 +59,16 @@ class PostController extends Controller
         ]);
         $post->name = $request->name;
         $post->user_id = Auth::id();
+        $file = $request->image;
+        $file->move('upload', $file->getClientOriginalName());
+        $post->images = $file->getClientOriginalName();
+        $list_images = [];
+        if ($request->list_images) {
+            foreach ($request->list_images as $item) {
+                array_push($list_images, $item->getClientOriginalName());
+            }
+            $post->list_images = json_encode($list_images);
+        }
         $result = $post->save();
         if ($result) {
             return redirect()->route('posts.create')->with('mess', trans('message.post_create_success'));
@@ -76,7 +87,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $this->authorize($post, 'update');
-       
+
         return view('posts.edit', compact('post'));
     }
 
@@ -96,6 +107,9 @@ class PostController extends Controller
         $validated = $request->validate([
             'name' => 'required|min:3',
         ]);
+        if ($request->image !== null) {
+            $post->images = $request->image;
+        }
         $result = $post->save();
         if ($result) {
             return redirect()->route('posts.show', $user_id)->with('mess', trans('message.post_edit_success'));

@@ -24,7 +24,10 @@ return [
     'add_post' => 'Thêm bài viết',
     'edit_post' => 'Sửa bài viết',
     'edit' => 'Sửa bài',
+    'author' => 'Tác giả',
     'delete'=> 'Xóa bài',
+    'image' => 'Hình ảnh',
+    'list_images' => 'Danh Sách Hình Ảnh',
     'have_not_posts' => 'Chưa có bài viết nào',
     'lang' => [
         'en' => 'English',

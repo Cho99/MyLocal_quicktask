@@ -22,7 +22,9 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">{{ trans('label.name_post') }}</th>
-                                <th scope="col">{{ trans('label.total_posts') }}</th>
+                                <th scope="col">{{ trans('label.image') }}</th>
+                                <th scope="col">{{ trans('label.list_images') }}</th>
+                                <th scope="col">{{ trans('label.author') }}</th>
                                 <th scope="col">{{ trans('label.action') }}</th>
                             </tr>
                         </thead>
@@ -34,6 +36,19 @@
                                 <tr>
                                     <th scope="row">{{ $index++ }}</th>
                                     <td>{{ $post->name }}</td>
+                                    <td><img class="imgae-post" src="{{ asset('upload/' . $post->images) }}" alt=""></td>
+                                    <td>
+                                        @if ($post->list_images)
+                                            @php
+                                            $list_images = json_decode($post->list_images)
+                                            @endphp
+                                            @foreach ($list_images as $item)
+                                                <div><img class="imgae-post" src="{{ asset('upload/' . $item) }}" alt=""></div>
+                                            @endforeach
+                                        @else
+                                            <div>No Images</div>
+                                        @endif
+                                    </td>
                                     <td>{{ $user->name }}</td>
                                     <td>
                                         <div class="d-flex">

@@ -4,7 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="{{ route('posts.create') }}" type="button" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"></i> {{ trans('label.add_post') }}</a>
+                <a href="{{ route('posts.create') }}" type="button" class="btn btn-primary mb-2"><i
+                        class="fas fa-plus-circle"></i> {{ trans('label.add_post') }}</a>
                 <table class="table">
                     <thead>
                         <tr>
